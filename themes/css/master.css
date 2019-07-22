@@ -1,0 +1,309 @@
+@font-face {
+font-family: UTM_AVO; 
+src : url('../webfonts/UTM_Avo.ttf') format('truetype');
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face {
+font-family: UTM_AVOB; 
+src : url('../webfonts/UTM_AvoBold.ttf') format('truetype');
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face {
+font-family: AntennaL; 
+src : url('../webfonts/FordAntennaWGL_Light.otf') format('opentype');
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face {
+font-family: AntennaB; 
+src : url('../webfonts/FordAntennaWGL_Bold.otf') format('opentype');
+	font-weight:normal;
+	font-style:normal;
+}
+html, body{font-family: 'AntennaL', Times, serif; font-size: 16px;}
+.menu-nav{margin:0px; padding:0px;}
+.banner{margin:0px auto; padding-bottom:20px;height:100%;background: white;padding-top:20px}
+.banner2{margin:0px auto; padding:0px; padding-bottom:20px;height:100%;background: white;padding-top:20px}
+.language {list-style: none;display: inline-flex;padding-left:10px;margin:0px;}
+.language button{color: #58585b;font-size:18px;padding:5px;float: left;    background: none;border: none;    cursor: pointer; }
+.language button.active{color: #faa519;}
+.page-01 {background:#d1d2d4}
+.ul_dot {margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);padding:0px;margin:0px;
+  }
+.ul_dot li{list-style:none;display: inline-flex;padding-bottom:10px;}
+.ul_dot li::before{content:url("../image/dot-02.jpg")}
+.ul_dot li span{padding-left:10px;}
+.ul_menu {margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);padding:0px;margin:0px;list-style:none;
+  }
+ .ul_menu li a{display: block;padding: 15px 0px 15px 100px;font-size:18px; color:white; text-decoration: none;}
+
+ .ul_menu li:nth-child(odd) a{background:#9f9f9f}
+ .ul_menu li:nth-child(even) a{background:#c1c0c0}
+  .ul_menu li a:hover{background:#f9a426;color:black}
+  .ul_menu li a.activex{background:#f9a426;color:black}
+ 
+ .image-banner-02{
+	 margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);padding:0px;margin:0px;
+ }
+ .contact {padding:0px 10px;}
+ .button_search {border:none;}
+ ul.navbar-nav li a {text-transform:uppercase;}
+ .banner-home a{text-decoration:none; color:#58585b;font-size:25px;}
+ .banner-home .slick-list{margin:0px;}
+ .artworks-text {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    text-align: center;
+}
+ .artworks-text span {
+    color: white;
+    padding-top: 5px;
+    text-transform: uppercase;
+    font-size: 25px;
+}
+.base {
+    /*background: #00546b;*/
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#96181d+0,c42127+51,96181d+100 */
+	background: #96181d; /* Old browsers */
+	background: -moz-linear-gradient(top, #96181d 0%, #c42127 51%, #96181d 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #96181d 0%,#c42127 51%,#96181d 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #96181d 0%,#c42127 51%,#96181d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#96181d', endColorstr='#96181d',GradientType=0 ); /* IE6-9 */
+    display: inline-block;
+    height: 50px;
+    position: relative;
+    width: 250px;
+}
+   .base:after {
+    border-top: 15px solid #96181D;
+    border-left: 125px solid transparent;
+    border-right: 125px solid transparent;
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    bottom: -15px;
+    width: 0;
+  }
+ .products{margin-top: -5px;}
+ .products .items {}
+ .products .items .contents_product_odd{background:#bbbcbf;    padding: 5px 15px; }
+ .products .items .contents_product_even{background:#e6e6e6;    padding: 5px 15px; }
+ .products .items h4{text-transform:uppercase; text-align:center;padding-top:10px;color:#96181d;font-weight:bold;font-size:18px;}
+ .products .items p{text-align:justify;}
+ .products .items a{text-decoration:none;color:black;}
+ 
+ 
+ .right_services {padding-top:20%;background:#c7ab5b; color:white;}
+ .right_services h4{font-weight:bold;}
+ .itemnews {text-align: center; }
+.itemnews h4{ color: #00546B; text-transform: uppercase; font-size: 16px;padding:20px 0px 0px 0px;font-weight: bold;}
+.itemnews p{color: #6D6E70;}
+.itemnews a {text-transform: uppercase; color: white; background: #6D6E70;border: none;padding:2px 15px;border-radius: 20px;}
+ .footer {background:#59595a;color:white; padding:30px 0px;}
+ .footer h4{padding:10px 0px;font-weight:bold;font-size:20px;}
+ .footer p{margin-bottom:5px;}
+ .banner_content{    top: 50%;
+    left: 10%;
+    margin: 0 auto;
+    position: absolute;}
+ .banner_content h4 {color:#b01116; font-size:44px;font-weight:bold;}
+ 
+ 
+.navbar-nav-primary {
+  text-transform: uppercase;
+}
+
+.navbar-form-search {
+  position: relative;
+}
+.navbar-form-search .form-control {
+  width: 250px;
+}
+.navbar-form-search .btn {
+  border: 0;
+  background: transparent;
+  font-size: 18px;
+}
+.navbar-form-search .btn:active, .navbar-form-search .btn:hover, .navbar-form-search .btn:focus {
+  color: #000;
+  outline: none;
+  box-shadow: none;
+}
+.navbar-form-search .search-form-container {
+  text-align: right;
+  position: absolute;
+  width: 300px;
+  overflow: hidden;
+  background: #fff;
+  right: 60px;
+  top: 0;
+  z-index: 9;
+  transition: all .3s ease-in-out;
+}
+.navbar-form-search .search-form-container.hdn {
+  width: 0;
+}
+.navbar-form-search .search-form-container .search-input-group {
+  width: 300px;
+}
+
+/*trang san pham*/
+.breadcrumb {background:white;padding:15px 0px;text-transform: uppercase;color:#96181d;font-weight:bold;margin:0px;}
+.breadcrumb li.active{color:#96181d;}
+.breadcrumb a{color:#96181d;}
+
+.chitietsanpham table {width:100%!important;}
+.chitietsanpham table tr td{text-align:center;}
+.chitietsanpham table tr td p{margin:0px;    padding: 10px 0px;}
+.chitietsanpham table tr:first-child td{text-align:center;background:#d0d1d3;}
+.chitietsanpham table tr:first-child td p{margin:0px;    padding: 10px 0px;}
+.content_detail_product {padding-top:50px;}
+.content_detail_product h4{color:#97181f; text-transform:uppercase;font-weight:bold;margin-bottom:30px;}
+.content_detail_product p{margin:0px;}
+.productssub {padding:0px;}
+.borderx {border: solid 1px gainsboro;}
+.news h4 {font-size:16px;}
+.news p.date { font-style:italic;margin-bottom: 20px;
+    border-bottom: dotted 1px gainsboro;
+    padding-bottom: 10px;}
+.orther_news h4{color:#96181d; font-size:16px;}
+.orther_news {color:#d0d1d3;}
+.orther_news a{color:#212529;}
+.banner-page {width:100%;}
+.banner-page.banner-text {background:#122534; color:white;padding: 10% 0px 0px 10%;}
+.banner-page.banner-text h4 {color:#d0ac54;font-size:25px;font-weight:bold;text-transform:uppercase;}
+.items_news {padding-bottom:15px;padding-top:15px;    border-bottom: solid 1px gainsboro;text-align:left;}
+.items_news h4{font-size:16px;color:#f6ba14;font-weight:bold;}
+.items_news p.date{font-size:14px;}
+#search {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    
+    -webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+
+    -webkit-transform: translate(0px, -100%) scale(0, 0);
+	-moz-transform: translate(0px, -100%) scale(0, 0);
+	-o-transform: translate(0px, -100%) scale(0, 0);
+	-ms-transform: translate(0px, -100%) scale(0, 0);
+	transform: translate(0px, -100%) scale(0, 0);
+    
+    opacity: 0;
+}
+
+#search.open {
+    -webkit-transform: translate(0px, 0px) scale(1, 1);
+    -moz-transform: translate(0px, 0px) scale(1, 1);
+	-o-transform: translate(0px, 0px) scale(1, 1);
+	-ms-transform: translate(0px, 0px) scale(1, 1);
+	transform: translate(0px, 0px) scale(1, 1); 
+    opacity: 1;z-index: 2;
+}
+
+#search input[type="search"] {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    background: rgba(0, 0, 0, 0);
+    font-size: 60px;
+    font-weight: 300;
+    text-align: center;
+    border: 0px;
+    margin: 0px auto;
+    margin-top: -51px;
+    padding-left: 30px;
+    padding-right: 30px;
+    outline: none;
+}
+#search .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: 61px;
+    margin-left: -45px;
+}
+#search .close {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+	background-color: #428bca;
+	border-color: #357ebd;
+	opacity: 1;
+	padding: 10px 17px;
+	font-size: 27px;
+}
+.form_contact textarea{min-height:150px;}
+.other_products{background:#e6e6e6;}
+.other_products h4,.other_products h5 {color:#97181f;text-transform:uppercase;}
+.other_products h5 {text-align:center;padding-top:20px;}
+.other_products .slick-slide {padding:0px 5px;}
+.baivietquangcao {font-size:16px;color:#6d6e70;text-align:justify;margin-top:50px;width:100%;}
+.baivietquangcao h4{color:white;background:#b01116;font-size:20px;padding: 5px 15px;display: inline-block;}
+.baivietquangcao p{width:100%}
+
+
+@media (max-width: 678px){
+	html, body{font-family: 'UTM_AVO', Times, serif; font-size: 14px;}
+	.image-banner-02{height:auto!important;width:100%;}
+	.menu-nav { padding: 0px 10px; }
+	.ul_menu li a{padding: 5px 0px 5px 10px;}
+	.banner2 {padding-top:0px;}
+	.artworks-text span {font-size: 20px;}
+	.base {width: 200px;}
+	.base:after {
+		border-left: 100px solid transparent;
+		border-right: 100px solid transparent;
+	}
+	.banner_content{    top: 30%;font-size:12px;
+    left: 15px;}
+    .banner_content h4 {color:#b01116; font-size:14px;font-weight:bold;}
+     .products .items {padding-bottom:10px;padding-right:0px;}
+     .itemnews {padding-bottom:10px;padding-right:0px; }
+     .xs-m-0 {margin:0px;}
+     .breadcrumb {padding:0px 10px;margin:10px 0px;}
+     .chitietsanpham table {font-size:12px;}
+     .chitietsanpham{padding-top:15px;}
+     .productssub .items{padding:0px; padding-top:10px;}
+     .itemssub {    padding: 0px 10px;
+    margin: 0px;}
+    
+.banner-page.banner-text {background:#122534; color:white;padding: 7% 0px 0px 7%;}
+.banner-page.banner-text h4 {color:#d0ac54;font-size:18px;font-weight:bold;text-transform:uppercase;}
+.news {padding:0px 10px!important;}
+.items_news {padding:10px 10px;margin-bottom:20px;}
+.services {padding:5px 10px;}
+.box_col_chan_1,.box_col_chan_2,.box_col_le_1,.box_col_le_2 {padding:10px!important;}
+.box_top_le {padding-left:0px!important;}
+}
+
+
+
