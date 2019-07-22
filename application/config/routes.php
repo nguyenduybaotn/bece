@@ -52,3 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'frontend';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+//backend
+$route['kiem-tra-dang-nhap'] = 'backend/kiemtradangnhap';
+$route['dashboard'] = 'backend/dashboard';
+$route['logout'] = 'backend/logout';

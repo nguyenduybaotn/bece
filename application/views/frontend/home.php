@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$PATH_FOLDER_VIEW = "frontend/";
 if(!isset($_SESSION['lang'])){
 	$url=$this->uri->segment(1);
 	if($url==''){
@@ -82,8 +83,8 @@ if(isset($_POST['language_eng'])){
 
 $ten ='tenmenu'.$_SESSION['lang'];
 $lienket ='lienket'.$_SESSION['lang'];
-$title = "New Galaxy Power ";
-$description = "New Galaxy Power ";
+$title = "Trung Tâm Hội Nghị và Triển Lãm Bình Dương ";
+$description = "Trung Tâm Hội Nghị và Triển Lãm Bình Dương ";
 if($this->tool_model->get_element_table_where($ten,'menu',"$lienket='$url'")){
 	$title = $this->tool_model->get_element_table_where($ten,'menu',"$lienket='$url'")." | New Galaxy Power";
 }
@@ -147,7 +148,7 @@ $logo = $this->tool_model->get_element_table_where('logo','cauhinh','id=1');
 	<div class="container-fluid body p-0">
 	<?php 
 	if(isset($view)) $this->load->view($view); 
-	$this->load->view("footer");
+	$this->load->view($PATH_FOLDER_VIEW."footer");
 	?>
 	</div>
 	<!-- end body -->
