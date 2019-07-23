@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 23, 2019 lúc 11:04 AM
+-- Thời gian đã tạo: Th7 23, 2019 lúc 11:59 AM
 -- Phiên bản máy phục vụ: 10.1.28-MariaDB
 -- Phiên bản PHP: 7.1.10
 
@@ -170,16 +170,17 @@ CREATE TABLE `nhanvien` (
   `hoten` text NOT NULL,
   `matkhau` varchar(100) NOT NULL,
   `trangthai` int(11) NOT NULL,
-  `hinhdaidien` text NOT NULL
+  `hinhdaidien` text NOT NULL,
+  `email` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `nhanvien`
 --
 
-INSERT INTO `nhanvien` (`id`, `tendangnhap`, `tendangnhapmd5`, `hoten`, `matkhau`, `trangthai`, `hinhdaidien`) VALUES
-(1, 'nguyenduybaotn', 'ca7382a8942ed3d0308df15bbed74bf7', 'Nguyễn Duy Bảo', 'e10adc3949ba59abbe56e057f20f883e', 1, '/datauploads/menu/our-showcase-demo-035.jpg'),
-(3, 'administrator', '200ceb26807d6bf99fd6f4f0d1ca54d4', 'Admin', '40fbe32a8a5789ea8f62f978c81d2ba7', 1, '');
+INSERT INTO `nhanvien` (`id`, `tendangnhap`, `tendangnhapmd5`, `hoten`, `matkhau`, `trangthai`, `hinhdaidien`, `email`) VALUES
+(1, 'nguyenduybaotn', 'ca7382a8942ed3d0308df15bbed74bf7', 'Nguyễn Duy Bảo', 'e10adc3949ba59abbe56e057f20f883e', 1, '/datauploads/menu/our-showcase-demo-035.jpg', 'nguyenduybaotn@gmail.com'),
+(3, 'administrator', '200ceb26807d6bf99fd6f4f0d1ca54d4', 'Admin', '40fbe32a8a5789ea8f62f978c81d2ba7', 1, '', 'nguyenduybaotn@gmail.com');
 
 -- --------------------------------------------------------
 
