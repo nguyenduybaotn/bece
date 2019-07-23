@@ -171,6 +171,34 @@ class Tool_model extends CI_Model{
 		 }
 		return $sub . (($len < strlen($str)) ? '...' : '');
 	}	
+	function time_elapsed_string($datetime, $full = false) {
+		$now = new DateTime;
+		$ago = new DateTime($datetime);
+		$diff = $now->diff($ago);
+
+		$diff->w = floor($diff->d / 7);
+		$diff->d -= $diff->w * 7;
+
+		$string = array(
+			'y' => 'year',
+			'm' => 'month',
+			'w' => 'week',
+			'd' => 'day',
+			'h' => 'hour',
+			'i' => 'minute',
+			's' => 'second',
+		);
+		foreach ($string as $k => &$v) {
+			if ($diff->$k) {
+				$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+			} else {
+				unset($string[$k]);
+			}
+		}
+
+		if (!$full) $string = array_slice($string, 0, 1);
+		return $string ? implode(', ', $string) . ' ago' : 'just now';
+	}
 	public function count_row_table_where($table, $where){
 		$sql = "select * from $table where $where";
 		$kq = $this->db->query($sql);
@@ -203,11 +231,43 @@ class Tool_model extends CI_Model{
 			$ipaddress = 'UNKNOWN';
 		return $ipaddress;
 	}
-	public function ghi_log($ip, $thoigian, $content){
+	public function send_email($email,$title,$content){
+		/*hE3f+8&OOeT?*/
+		$config = array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'mail.nbcmedia.vn',
+                    'smtp_port' => 25,
+                    'smtp_user' => 'bao.nguyen@nbcmedia.vn',
+                    'smtp_pass' => 'ndb',
+                    'mailtype'  => 'html', 
+                    'charset'   => 'utf-8'  
+                );
+		$to = $email;
+	        $from = "booking@theorchestra.com";
+	        $subject = $title;
+	        $message = $content;
+	
+	        $this->load->library('email',$config);
+			
+	        $this->email->set_newline("\r\n");
+	        $this->email->from($from,'The Rainbow Show');
+	        $this->email->to($to);
+	        $this->email->subject($subject);
+	        $this->email->message($message);
+	 
+	        if($this->email->send()) {
+                    return true;
+        	}else {
+                    return false;
+        	}
+	}
+	public function ghi_log($ip, $thoigian, $content, $trangthai=0,$danhmuc=''){
 		$data = array(
 			'ip' 			=> $ip,
 			'thoigian'  	=> $thoigian,
-			'noidung' 		=> $content
+			'noidung' 		=> $content,
+			'trangthai'		=> $trangthai,
+			'danhmuc'		=> $danhmuc
 		);
 		$this->db->insert('truycap',$data);
 	}

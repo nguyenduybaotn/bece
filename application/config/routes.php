@@ -58,3 +58,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['kiem-tra-dang-nhap'] = 'backend/kiemtradangnhap';
 $route['dashboard'] = 'backend/dashboard';
 $route['logout'] = 'backend/logout';
+$route['forgot'] = 'backend/forgot';

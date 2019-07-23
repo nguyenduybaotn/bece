@@ -7,6 +7,7 @@ class Backend extends CI_Controller {
     các biến toàn cục
     */
     protected $FOLDER_VIEW_ADMIN = "backend/";
+	protected $checkLogin = false;
     /*
     function khởi tạo Controller load các thư viện mặc định
     */
@@ -47,6 +48,11 @@ class Backend extends CI_Controller {
 		// neu ton tai 1 nhan vien tro len thoa thong tin dang nhap
 		if($nhanvien=='-1'){
 			echo 0;
+			// ghi log
+			$thoigian = date("Y-m-d h:i:s");
+			$content_log = "";
+			$content_log .= "<b>".$data['tendangnhap']."</b> đăng nhập không thành công";
+			$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log,0);
 		}else if(count($nhanvien) == 1){
 			$newdata = array(
 				'id' => $nhanvien->id,
@@ -59,24 +65,25 @@ class Backend extends CI_Controller {
 			set_cookie('logged_in',true);
 			// tra ve ket qua dang json la id cua nhan vien tim thay
 			echo base_url("ckfinder/created_ses_ck.php?ses=login_ck&redirect=".base_url("dashboard"));//json_encode($nhanvien->id);
+			// ghi log
+			$thoigian = date("Y-m-d h:i:s");
+			$content_log = "";
+			$content_log .= "<b>".$nhanvien->tendangnhap."</b> đăng nhập thành công";
+			$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log,1,"Đăng nhập/Đăng xuất");
 		}else if(count($nhanvien) > 1 || count($nhanvien) == 0){ // khong ton tai hoac co tu 2 ket qua tro len
 			echo 0;
+			// ghi log
+			$thoigian = date("Y-m-d h:i:s");
+			$content_log = "";
+			$content_log .= "<b>".$data['tendangnhap']."</b> đăng nhập không thành công";
+			$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log,0);
 		}
-		// ghi log
-		$thoigian = date("Y-m-d h:i:s");
-		$content_log = "";
-		$content_log .= "Đăng nhập với thông tin ".json_encode($data);
-		$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
+		
 	}
 	public function dashboard(){
 		// neu dang dang nhap roi thi qua dashboard, nguoc lai thi dang nhap
 		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
-			// ghi log
-			$thoigian = date("Y-m-d h:i:s");
-			$content_log = "";
-			$content_log .= "Đăng nhập thành công ";
-			$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
-
+			
 			$data['title'] = "Dashboard";
 			$data['view'] = $this->FOLDER_VIEW_ADMIN.'dashboard';
 			$this->load->view( $this->FOLDER_VIEW_ADMIN.'master',$data);
@@ -86,15 +93,63 @@ class Backend extends CI_Controller {
 	}
 	public function logout(){
 		// unset $_SESSION['logged_in']
-		// ghi log
-		$thoigian = date("Y-m-d h:i:s");
-		$content_log = "";
-		$content_log .= "Logout";
-		$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
-
+		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
+			// ghi log
+			$thoigian = date("Y-m-d h:i:s");
+			$content_log = "";
+			$content_log .= "<b>".$_SESSION['tendangnhap']."</b> đã đăng xuất";
+			$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
+		}
 		$this->session->unset_userdata('logged_in');
 		$this->dashboard();
 	}
+	// kiem tra dang nhap tra ve id user neu dung thong tin hoac khong co thi tra ve 0
+	public function forgot()
+	{
+		
+		// user la bien truyen tu ajax trong file admin.js qua: user{ tendangnhap, matkhau }
+		$data = $this->input->post('email');
+		if(count($this->tool_model->get_all_table_where("nhanvien","email='$data'"))>0){
+			//co ton tai email
+			//send email
+			$content = "";
+			$title = "";
+			$config = array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'mail.nbcmedia.vn',
+                    'smtp_port' => 25,
+                    'smtp_user' => 'bao.nguyen@nbcmedia.vn',
+                    'smtp_pass' => 'ndb',
+                    'mailtype'  => 'html', 
+                    'charset'   => 'utf-8'  
+                );
+			$to = $email;
+	        $from = "booking@theorchestra.com";
+	        $subject = $title;
+	        $message = $content;
+	
+	        $this->load->library('email',$config);
+			
+	        $this->email->set_newline("\r\n");
+	        $this->email->from($from,'The Rainbow Show');
+	        $this->email->to($to);
+	        $this->email->subject($subject);
+	        $this->email->message($message);
+	 
+	        $this->email->send();
+			echo $this->email->print_debugger();
+			/*
+			if($this->tool_model->send_email($data,"1","2"))
+				echo "1";
+			else
+				echo "2";
+			*/
+		}else{
+			echo "-1";
+		}
+		
+	}
+	
 	public function cauhinh(){
 		// neu dang dang nhap roi thi qua cau hinh, nguoc lai thi dang nhap
 		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
@@ -137,11 +192,22 @@ class Backend extends CI_Controller {
 	public function profile($tendangnhap){
 		// neu dang dang nhap roi thi qua cau hinh, nguoc lai thi dang nhap
 		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
-			// ghi log
-			$thoigian = date("Y-m-d h:i:s");
-			$content_log = "";
-			$content_log .= "Vào trang profile của ".$tendangnhap;
-			$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
+			// set rule la ten phai co 
+			$this->form_validation->set_rules('hoten', 'hoten', 'required');
+			if ($this->form_validation->run() == TRUE){
+				if (empty($_FILES['file']['name']) ) {
+					$this->nhanvien_model->profile_update('');
+				}else{
+					$datax=$this->upload_image('menu','file');
+					$this->nhanvien_model->profile_update($datax['path']);
+				}
+				
+				// ghi log
+				$thoigian = date("Y-m-d h:i:s");
+				$content_log = "";
+				$content_log .= "Vào trang profile của ".$tendangnhap;
+				$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
+			}
 
 			$data['user'] = $this->tool_model->get_all_table_where('nhanvien',"tendangnhap='$tendangnhap'");
 			$data['title'] = 'Cấu hình thông tin tài khoản';
@@ -250,7 +316,119 @@ class Backend extends CI_Controller {
 			$this->load->view( $this->FOLDER_VIEW_ADMIN.'login');
 		}
 	}
-	
+	public function menu(){
+		// neu dang dang nhap roi thi qua cau hinh, nguoc lai thi dang nhap
+		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
+			// ghi log
+			$thoigian = date("Y-m-d h:i:s");
+			$content_log = "";
+			$content_log .= "Vào trang menu";
+			$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
+
+			$data['page'] = 'menu';// page cho biet la dang o trang nao de active menu
+			$data['group'] = 1;// group cho biet la dang o group nao de active group ben menu
+			$data['js'] = $this->FOLDER_VIEW_ADMIN.'menu_js';
+			$data['view'] = $this->FOLDER_VIEW_ADMIN.'menu';
+			$this->load->view( $this->FOLDER_VIEW_ADMIN.'master',$data);
+		}else{
+			$this->load->view( $this->FOLDER_VIEW_ADMIN.'login');
+		}
+	}
+	public function themmenu(){
+		// neu dang dang nhap roi thi qua cau hinh, nguoc lai thi dang nhap
+		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
+			
+			$data['page'] = 'menu';
+			$data['group'] = '1';
+			$data['view'] = $this->FOLDER_VIEW_ADMIN.'themmenu';
+			// set rule la ten phai co 
+			$this->form_validation->set_rules('ten2', 'ten2', 'required');
+			if ($this->form_validation->run() == TRUE){
+			    $id= 0;
+				// thuc thi khi co ten va dang submit thong tin tuc luu vao database
+				if (empty($_FILES['file']['name']) ) {
+					$id = $this->tool_model->themmenu('');
+				}else{
+					$datax=$this->upload_image('menu','file');
+					$id = $this->tool_model->themmenu($datax['path']);
+				}
+				// ghi log
+				$thoigian = date("Y-m-d h:i:s");
+				$content_log = "";
+				$content_log .= "Thêm menu ".json_encode($this->tool_model->get_all_table_where('menu',"id=$id"));
+				$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
+				
+				header("location:".base_url()."backend/menu");
+			}
+			$this->load->view( $this->FOLDER_VIEW_ADMIN.'master',$data);
+		}else{
+			$this->load->view( $this->FOLDER_VIEW_ADMIN.'login');
+		}
+	}
+	public function suamenu($id){
+		// neu dang dang nhap roi thi qua cau hinh, nguoc lai thi dang nhap
+		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
+			$data['page'] = 'menu';// page cho biet la dang o trang nao de active menu
+			$data['group'] = 1;// group cho biet la dang o group nao de active group ben menu
+			$data['js'] = $this->FOLDER_VIEW_ADMIN.'menu_js';
+			$data['view'] = $this->FOLDER_VIEW_ADMIN.'suamenu';
+			$data['id']=$id;
+			
+			$this->form_validation->set_rules('ten2', 'ten2', 'required');
+			if ($this->form_validation->run() == TRUE){
+				// lay mang menu co id=$id
+				$menu = $this->tool_model->get_all_table_where('menu',"id=$id");
+				
+				if (empty($_FILES['file']['name']) ) {
+					$this->tool_model->suamenu($id,'');
+				}else{
+					//xoa hinh cu
+					$hinhcu = $this->tool_model->get_element_table_where("img",'menu',"id=$id");
+					if($hinhcu){
+						$hinhcu = getcwd().$hinhcu;
+						if(file_exists($hinhcu)){
+							unlink($hinhcu);
+						}
+					}
+					$datax=$this->upload_image('menu','file');
+					$this->tool_model->suamenu($id,$datax['path']);
+				}
+				$menu2 = $this->tool_model->get_all_table_where('menu',"id=$id");
+				// ghi log
+				$thoigian = date("Y-m-d h:i:s");
+				$content_log = "";
+				$content_log .= "Đang sửa menu id ".$id." với giá trị ban đầu: ".json_encode($menu)." thành: ".json_encode($menu2);
+				$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
+				header("location:".base_url()."backend/menu");
+			}
+			$this->load->view( $this->FOLDER_VIEW_ADMIN.'master',$data);
+		}else{
+			$this->load->view( $this->FOLDER_VIEW_ADMIN.'login');
+		}
+	}
+	public function xoamenu($id){
+		// neu dang dang nhap roi thi qua cau hinh, nguoc lai thi dang nhap
+		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
+			// ghi log
+			$thoigian = date("Y-m-d h:i:s");
+			$content_log = "";
+			$content_log .= "Xóa menu id: ".$id." với giá trị: ".json_encode($this->tool_model->get_all_table_where('menu',"id=$id"));
+			$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log);
+
+			//xoa hinh cu
+    		$hinhcu = $this->tool_model->get_element_table_where("img",'menu',"id=$id");
+    		if($hinhcu!=''){
+				$hinhcu = getcwd().$hinhcu;
+				if(file_exists($hinhcu)){
+					unlink($hinhcu);
+				}
+    		}
+			$this->tool_model->xoamenu($id);
+			header("location:".base_url()."backend/menu");
+		}else{
+			$this->load->view( $this->FOLDER_VIEW_ADMIN.'login');
+		}
+	}
 	
 	
 	

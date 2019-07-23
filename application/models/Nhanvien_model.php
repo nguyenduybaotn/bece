@@ -53,6 +53,31 @@ class Nhanvien_model extends CI_Model{
 		
 	}
 	
+	function profile_update($path){
+		$hoten = $this->input->post('hoten');
+		$tendangnhap = $this->input->post('ten');
+		$matkhau = $this->input->post('matkhau');
+		if($path=='') $path = $this->tool_model->get_element_table_where('hinhdaidien','nhanvien',"tendangnhap='".$tendangnhap."'"); 
+		if($matkhau != ''){
+			$data = array(
+				'hoten' 		=> $hoten,
+				'matkhau' 		=> md5($matkhau),
+				'hinhdaidien'	=> $path
+			);
+			$this->db->where('tendangnhap',$tendangnhap);
+			$this->db->update($this->table_nhanvien['ten'],$data);
+			//$this->db->insert('nhanvien',$data);
+		}else{
+			$data = array(
+				'hoten' 		=> $hoten,
+				'hinhdaidien'	=> $path
+			);
+			$this->db->where('tendangnhap',$tendangnhap);
+			$this->db->update($this->table_nhanvien['ten'],$data);
+			//$this->db->insert('nhanvien',$data);
+		}
+	}
+	
 	function themnhanvien(){
 		$ten = $this->input->post('ten');
 		$tendangnhap = $this->input->post('tendangnhap');

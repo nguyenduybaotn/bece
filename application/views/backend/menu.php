@@ -16,7 +16,6 @@
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Hình</th>
                 <th>Tên</th>
                 <th>Danh mục</th>
                 <th>Trại thái</th>
@@ -25,18 +24,16 @@
         </thead>
         <tbody class=''>
             <?php 
-			$danhsachmenu = $this->tool_model->get_all_table('menu');
+			$danhsachmenu = $this->tool_model->get_all_table_where('menu',"1");
 			$result = "";
 			$i=1;
 			// lap qua danh sach
 			foreach($danhsachmenu as $menu){
 				$menu->trangthai ? $trangthai = "<i class='btn btn-success btn-sm'>Kích hoạt</i>" : $trangthai = "<i class='btn btn-danger btn-sm'>Ẩn</i>";
 				$menu->danhmuccha ? $danhmuccha=$this->tool_model->get_element_table_where('tenmenu','menu',"id=$menu->danhmuccha"):$danhmuccha = 'Gốc';
-				$img = base_url($menu->img);
-				if($menu->img=='') $img='https://via.placeholder.com/114x50';
+				
 				$result .= "<tr>
 						<td scope='row'>".$i."</td>
-						<td scope='row'><img style='height:50px;' src='$img' /></td>
 						<td><b>".$menu->tenmenu2."</b> </br> $menu->tenmenu</td>
 						<td>".$danhmuccha."</td>
 						<td>".$trangthai."</td>

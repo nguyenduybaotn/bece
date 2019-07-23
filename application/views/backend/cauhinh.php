@@ -6,14 +6,7 @@
     </ol>
 </nav>
 <div class="row m-0">
-    <ul class="nav nav-tabs" id="myTab" role="tablist" style='width:100%;margin-bottom: 20px;'>
-	  <li class="nav-item">
-		<a class="nav-link active" id="home-tab" onclick='show_home()' data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tiếng Anh</a>
-	  </li>
-	  <li class="nav-item">
-		<a class="nav-link" id="profile-tab" data-toggle="tab" onclick='hidden_home()' href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tiếng Việt</a>
-	  </li>
-	</ul>
+    <?php $this->load->view('/backend/bar_lang'); ?>
 	 <?php echo validation_errors(); ?>
 	<?php foreach($this->tool_model->get_all_table_where('cauhinh','id=1') as $row){ ?>
 	<form style="    width: 100%;" role="form" method="post" name="upload_form" id="upload_form" enctype="multipart/form-data" action="">
@@ -48,6 +41,8 @@
                 <div class="form-group mt-5">
                     <button name="" id="" class="btn btn-success btn-sm btn-luutintuc" type='submit'>
                     <i class="fa fa-save"></i>&nbsp;&nbsp;Lưu lại</button>
+					<a href="<?php echo base_url('backend/menu')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
+					<i class="fa fa-save"></i>&nbsp;&nbsp;Quay lại</a>
                 </div>
             </div>
 			<div class="col col-lg-6 col-md-6 col-xs-12">
@@ -67,6 +62,8 @@
 				<div class="form-group mt-5">
 					<button name="" id="" class="btn btn-success btn-sm btn-luutintuc" type='submit'>
 					<i class="fa fa-save"></i>&nbsp;&nbsp;Lưu lại</button>
+					<a href="<?php echo base_url('backend/menu')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
+					<i class="fa fa-save"></i>&nbsp;&nbsp;Quay lại</a>
 				</div>
 			</div>
 		 </div>

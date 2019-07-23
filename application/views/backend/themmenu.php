@@ -6,14 +6,7 @@
     </ol>
 </nav>
 <div class="row m-0">
-	<ul class="nav nav-tabs" id="myTab" role="tablist" style='width:100%;margin-bottom: 20px;'>
-	  <li class="nav-item">
-		<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tiếng Anh</a>
-	  </li>
-	  <li class="nav-item">
-		<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tiếng Việt</a>
-	  </li>
-	</ul>
+	<?php $this->load->view('/backend/bar_lang'); ?>
 	<form style="    width: 100%;" role="form" method="post" name="upload_form" id="upload_form" enctype="multipart/form-data" action="">
 	<div class="tab-content" id="myTabContent"   style='width:100%;'>
 		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"   style='width:100%;'>
@@ -39,7 +32,7 @@
 						?>
 					</select>
 				</div>
-				<div class="form-group">
+				<div class="d-none form-group">
 					<label for="">Hình đại diện <b>(kích thước chuẩn 800x735)</b></label>
 					<input type="file" class="form-control" name="file" id="file" aria-describedby="helpId" placeholder="" />
 					
@@ -56,18 +49,22 @@
 				<div class="form-group mt-5">
 					<button name="" id="" class="btn btn-success btn-sm btn-luutintuc" type='submit'>
 					<i class="fa fa-save"></i>&nbsp;&nbsp;Lưu lại</button>
+					<a href="<?php echo base_url('backend/menu')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
+					<i class="fa fa-save"></i>&nbsp;&nbsp;Quay lại</a>
 				</div>
 			</div>
 		</div>
 		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"   style='width:100%;'>
 			<div class="col-lg-12 col-md-12 col-xs-12">
 				<div class="form-group">
-					<label for="">Tên sản phẩm</label>
+					<label for="">Tên</label>
 					<input type="text" class="form-control" value='' name="ten" id="ten" aria-describedby="helpId" placeholder="" />
 				</div>
 				<div class="form-group mt-5">
 					<button name="" id="" class="btn btn-success btn-sm btn-luutintuc" type='submit'>
 					<i class="fa fa-save"></i>&nbsp;&nbsp;Lưu lại</button>
+					<a href="<?php echo base_url('backend/menu')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
+					<i class="fa fa-save"></i>&nbsp;&nbsp;Quay lại</a>
 				</div>
 			</div>
 		 </div>

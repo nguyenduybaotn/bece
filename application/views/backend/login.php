@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						 <p ><span class="fa fa-user"></span><input type="text"  class="login__input name" Placeholder="Username" autofocus required></p>
 						 <p><span class="fa fa-lock"></span><input type="password"  class="login__input pass" Placeholder="Password" required></p>
 						 <div>
-							<span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Forgot
+							<span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" data-toggle="modal" data-target="#myModal"  href="#">Quên mật khẩu
 							password?</a></span>
 							<span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" onclick='return false' class="login__submit" value="Sign In"></span>
 						 </div>
@@ -40,48 +40,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 </div>
 		  </center>
 	   </div>
+	   <div class="modal" id="myModal">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+
+			  <!-- Modal Header -->
+			  <div class="modal-header">
+				<h4 class="modal-title">Lấy lại mật khẩu</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			  </div>
+
+			  <!-- Modal body -->
+			  <div class="modal-body">
+				<div class="form-group">
+					<label for="">Email</label>
+					<input type="text"  class="form-control email" value='' name="email" id="email" aria-describedby="helpId" placeholder="" />
+				</div>
+			  </div>
+
+			  <!-- Modal footer -->
+			  <div class="modal-footer">
+				<button type="button" class="form-control forgot__submit" class="btn btn-danger" >Gửi</button>
+			  </div>
+
+			</div>
+		  </div>
+		</div>
 	</div>
-	<!--
-    <div class="cont">
-        <div class="demo">
-            <div class="login">
-                <div class="login__check"></div>
-                    <form action='' method='post'>
-                    <div class="login__form">
-                        <span class="loi" role="alert">
-                        </span>
-                        <div class="login__row">
-                        <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
-                            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
-                        </svg>
-                        <input type="text" class="login__input name" placeholder="Username" autofocus/>
-                        </div>
-                        <div class="login__row">
-                        <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
-                            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
-                        </svg>
-                        <input type="password" class="login__input pass" placeholder="Password"/>
-                        </div>
-                        <button  type="submit" onclick='return false' class="login__submit">
-                         Sign in</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
 	
     <script src="<?php echo base_url('themes/js/jquery-3.3.1.min.js');?>" ></script>
     <script src="<?php echo base_url('themes/js/popper.js');?>" ></script>
     <script src="<?php echo base_url('themes/js/bootstrap.min.js');?>" ></script>
     <script src="<?php echo base_url('themes/js/notify.min.js');?>" ></script>
-    <script src="<?php echo base_url('themes/js/login.js');?>" ></script>
     <script>
         var base_url = '<?php echo base_url();?>';
 		$(document).ready(function(){
 		/* =========================== login ==================================== */    
 			$('.login__submit').click(function(){
+				console.log("1");
 				$('.login__submit').attr('disabled','disabled');
 				$('.login__submit').html("<i class='fa fa-spinner fa-spin'></i> &nbsp;&nbsp; Loading...");
 				
@@ -91,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				}
 					$.ajax({
 						type  : 'POST',
-						url : base_url+'kiem-tra-dang-nhap',
+						url : base_url+'backend/kiemtradangnhap',
 						crossDomain: true,
 						data : {user:user},
 						success : function(response){
@@ -103,6 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								},1000);
 								
 							}else{
+								$.notify("Đăng nhập không thành công", "danger");
 								$('.login__submit').removeAttr('disabled');
 								$('.login__submit').html("Login");
 								$('.loi').addClass("alert alert-danger");
@@ -111,10 +108,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							}
 						},
 						error : function(response){
-							//console.log(response);
-							$.notify(response, "success");
+							$.notify("Đăng nhập không thành công", "danger");
 							$('.login__submit').html("Sign in");
-							//location.reload();
+						}
+					});
+			});
+			$('.forgot__submit').click(function(){
+				$('.forgot__submit').attr('disabled','disabled');
+				$('.forgot__submit').html("<i class='fa fa-spinner fa-spin'></i> &nbsp;&nbsp; Loading...");
+				
+				var email = $('.email').val();
+					$.ajax({
+						type  : 'POST',
+						url : base_url+'backend/forgot',
+						crossDomain: true,
+						data : {email:email},
+						success : function(response){
+							console.log(response);
+							if(response!=0){
+								$.notify("Gửi mail thành công", "success");
+							}else{
+								$.notify("Gửi mail không thành công", "danger");
+								$('.forgot__submit').removeAttr('disabled');
+								$('.forgot__submit').html("Login");
+								$('.loi').addClass("alert alert-danger");
+								$('.loi').html("Sai email!");
+								$('.forgot__submit').html("Gửi");
+							}
+						},
+						error : function(response){
+							$.notify("Gửi mail không thành công", "danger");
+							$('.forgot__submit').html("Sign in");
 						}
 					});
 			});

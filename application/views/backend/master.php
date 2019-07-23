@@ -12,6 +12,8 @@ $PATH_FOLDER_THEME = base_url("themes/Stellar-Admin/");
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php if(isset($title)) echo $title; else echo "Quản trị";?></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?php echo $PATH_FOLDER_THEME;?>node_modules/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="<?php echo $PATH_FOLDER_THEME;?>node_modules/simple-line-icons/css/simple-line-icons.css">
@@ -49,6 +51,7 @@ $PATH_FOLDER_THEME = base_url("themes/Stellar-Admin/");
               </div>
             </form>
           </li>
+		  <!--
           <li class="nav-item dropdown mail-dropdown">
             <a class="nav-link count-indicator" id="MailDropdown" href="#" data-toggle="dropdown">
                 <i class="icon-envelope-letter icons"></i>
@@ -97,68 +100,54 @@ $PATH_FOLDER_THEME = base_url("themes/Stellar-Admin/");
                 </div>
               </a>
               <a href="#" class="dropdown-item view-all">View all</a>
-			  -->
+			  
             </div>
           </li>
+		  
+        
+          <li class="nav-item d-none d-sm-block profile-img">
+            <a class="nav-link profile-image" href="#">
+              <img src="<?php echo $PATH_FOLDER_THEME;?>images/faces/face4.jpg" alt="profile-img">
+              <span class="online-status online bg-success"></span>
+            </a>
+          </li>
+		    -->
           <li class="nav-item dropdown notification-dropdown">
             
 			<a class="nav-link count-indicator" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i class="icon-speech icons"></i>
+              <i class="icon-people icons"></i>
               <span class="count"></span>
             </a>
             <div class="dropdown-menu navbar-dropdown preview-list notification-drop-down dropdownAnimation" aria-labelledby="notificationDropdown">
-              <a class="dropdown-item preview-item">
+              <a class="dropdown-item preview-item" href="<?php echo base_url('backend/profile/'.$_SESSION['tendangnhap']);?>">
                 <div class="preview-thumbnail">
                   <div class="preview-icon">
                     <i class="icon-info mx-0"></i>
                   </div>
                 </div>
                 <div class="preview-item-content">
-                  <p class="preview-subject font-weight-medium">Application Error</p>
+                  <p class="preview-subject font-weight-medium">Thay đổi thông tin cá nhân</p>
                   <p class="font-weight-light small-text">
-                    Just now
+                    Change info
                   </p>
                 </div>
               </a>
-              <a class="dropdown-item preview-item">
+              <a class="dropdown-item preview-item" href="<?php echo base_url('logout');?>">
                 <div class="preview-thumbnail">
                   <div class="preview-icon">
                     <i class="icon-speech mx-0"></i>
                   </div>
                 </div>
                 <div class="preview-item-content">
-                  <p class="preview-subject">Settings</p>
+                  <p class="preview-subject">Đăng xuất</p>
                   <p class="font-weight-light small-text">
-                    Private message
+                    Logout
                   </p>
                 </div>
               </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon">
-                    <i class="icon-envelope mx-0"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject">New user registration</p>
-                  <p class="font-weight-light small-text">
-                    2 days ago
-                  </p>
-                </div>
-              </a>
+              
             </div>
 			
-          </li>
-          <li class="nav-item lang-dropdown d-none d-sm-block">
-            <a class="nav-link" href="#">
-              <p class="mb-0">English <i class="flag-icon flag-icon-gb"></i></p>
-            </a>
-          </li>
-          <li class="nav-item d-none d-sm-block profile-img">
-            <a class="nav-link profile-image" href="#">
-              <img src="<?php echo $PATH_FOLDER_THEME;?>images/faces/face4.jpg" alt="profile-img">
-              <span class="online-status online bg-success"></span>
-            </a>
           </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center ml-auto" type="button" data-toggle="offcanvas">
@@ -202,17 +191,7 @@ $PATH_FOLDER_THEME = base_url("themes/Stellar-Admin/");
 					</div>
 				</div>
 			</div>
-			<!-- ROW ENDS -->
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
-					<div class="card calender-card">
-						<div class="card-body">
-							<h2 class="card-title">Calender</h2>
-							<div class="datepicker"></div>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 			<!-- ROW ENDS -->
         </div>
         <!-- content-wrapper ends -->
