@@ -77,7 +77,13 @@ class Nhanvien_model extends CI_Model{
 			//$this->db->insert('nhanvien',$data);
 		}
 	}
-	
+	function update($field,$value,$email){
+		$data = array(
+			$field 		=> $value
+		);
+		$this->db->where('email',$email);
+		$this->db->update($this->table_nhanvien['ten'],$data);
+	}
 	function themnhanvien(){
 		$ten = $this->input->post('ten');
 		$tendangnhap = $this->input->post('tendangnhap');

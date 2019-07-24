@@ -6,10 +6,10 @@ print_r($homepage);
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Home</li>
-        <li class="breadcrumb-item " aria-current="page">Sửa dịch vụ</li>
+        <li class="breadcrumb-item " aria-current="page">Sửa blog</li>
     </ol>
 </nav>
-<?php foreach($this->tool_model->get_all_table_where('dichvu',"id=$id") as $row){?>
+<?php foreach($this->tool_model->get_all_table_where('blog',"id=$id") as $row){?>
 <div class="row m-0">
     <?php $this->load->view('/backend/bar_lang'); ?>
 	 <?php echo validation_errors(); ?>
@@ -44,9 +44,9 @@ print_r($homepage);
                      Hiển thị
                 </div>
                 <div class="form-group mt-5">
-                    <button name="" id="" class="btn btn-success btn-sm btn-luudichvu" type='submit'>
+                    <button name="" id="" class="btn btn-success btn-sm btn-luublog" type='submit'>
                     <i class="fa fa-save"></i>&nbsp;&nbsp;Lưu lại</button>
-                    <a href="<?php echo base_url('backend/dichvu')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
+                    <a href="<?php echo base_url('backend/blog')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
 					<i class="fa fa-save"></i>&nbsp;&nbsp;Quay lại</a>
                 </div>
             </div>
@@ -66,9 +66,9 @@ print_r($homepage);
                     <textarea class="form-control" name="noidung" id="editor2" aria-describedby="helpId" placeholder=""><?php echo $row->noidung; ?></textarea>
                 </div>
 				<div class="form-group mt-5">
-					<button name="" id="" class="btn btn-success btn-sm btn-luudichvu" type='submit'>
+					<button name="" id="" class="btn btn-success btn-sm btn-luublog" type='submit'>
 					<i class="fa fa-save"></i>&nbsp;&nbsp;Lưu lại</button>
-                    <a href="<?php echo base_url('backend/dichvu')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
+                    <a href="<?php echo base_url('backend/blog')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
 					<i class="fa fa-save"></i>&nbsp;&nbsp;Quay lại</a>
 				</div>
 			</div>

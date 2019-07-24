@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  <div class="modal-body">
 				<div class="form-group">
 					<label for="">Email</label>
-					<input type="text"  class="form-control email" value='' name="email" id="email" aria-describedby="helpId" placeholder="" />
+					<input type="text"  class="form-control email" value='nguyenduybaotn@gmail.com' name="email" id="email" aria-describedby="helpId" placeholder="" />
 				</div>
 			  </div>
 
@@ -125,20 +125,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						data : {email:email},
 						success : function(response){
 							console.log(response);
-							if(response!=0){
-								$.notify("Gửi mail thành công", "success");
-							}else{
-								$.notify("Gửi mail không thành công", "danger");
+							if(response=='1'){
+								$.notify("Gửi email thành công, vui lòng kiểm tra hộp thư email.", "success");
+								setTimeout(function(){
+									location.reload();
+								},3000);
+							}else if(response == '-1'){
+								$.notify("Không tìm thấy email này", "danger");
 								$('.forgot__submit').removeAttr('disabled');
-								$('.forgot__submit').html("Login");
 								$('.loi').addClass("alert alert-danger");
 								$('.loi').html("Sai email!");
 								$('.forgot__submit').html("Gửi");
+							}else if(response== '2'){
+								$.notify("Đã có lỗi xảy ra khi gửi email", "danger");
+								$('.forgot__submit').removeAttr('disabled');
+								$('.forgot__submit').html("Gửi");
+								$('.loi').addClass("alert alert-danger");
+								$('.loi').html("Lỗi gửi email!");
+							}else if(response== '0'){
+								$.notify("Đã quá giới hạn gửi email, vui lòng liên hệ Admin.", "danger");
+								$('.forgot__submit').removeAttr('disabled');
+								$('.forgot__submit').html("Gửi");
+								$('.loi').addClass("alert alert-danger");
+								$('.loi').html("Lỗi gửi email!");
 							}
 						},
 						error : function(response){
 							$.notify("Gửi mail không thành công", "danger");
-							$('.forgot__submit').html("Sign in");
+							$('.forgot__submit').html("Gửi");
 						}
 					});
 			});

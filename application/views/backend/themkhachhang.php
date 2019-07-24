@@ -2,7 +2,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Home</li>
-        <li class="breadcrumb-item " aria-current="page">Thêm dịch vụ</li>
+        <li class="breadcrumb-item " aria-current="page">Thêm khách hàng</li>
     </ol>
 </nav>
 <div class="row m-0">
@@ -22,8 +22,8 @@
                     <input type="text" class="form-control" name="mota2" id="mota2" aria-describedby="helpId" placeholder="" />
                 </div>
                 <div class="form-group">
-                    <label for="">Nội dung</label>
-                    <textarea class="form-control" name="noidung2" id="editor1" aria-describedby="helpId" placeholder=""></textarea>
+                    <label for="">Liên kết</label>
+                    <input type="text" class="form-control" name="lienket2" id="lienket2" aria-describedby="helpId" placeholder="" />
                 </div>
                 <div class="form-group">
                     <label for="">Hình đại diện (<b>Kích thước 951x635</b>)</label>
@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label for="">Sắp xếp(số lớn lên trên)</label>
                     <input type="text" class="form-control" name="sapxep" id="sapxep" 
-                    value="<?php echo $this->tool_model->get_max('dichvu');?>" aria-describedby="helpId" placeholder="" />
+                    value="<?php echo $this->tool_model->get_max('khachhang');?>" aria-describedby="helpId" placeholder="" />
                 </div>
                 <div class="form-group pl-4">
                     <input type="checkbox" class="form-check-input" name="trangthai" id="trangthai" checked>
@@ -41,7 +41,7 @@
                 <div class="form-group mt-5">
                     <button name="" id="" class="btn btn-success btn-sm btn-luutintuc" type='submit'>
                     <i class="fa fa-save"></i>&nbsp;&nbsp;Lưu lại</button>
-                    <a href="<?php echo base_url('backend/dichvu')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
+                    <a href="<?php echo base_url('backend/khachhang')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
 					<i class="fa fa-save"></i>&nbsp;&nbsp;Quay lại</a>
                 </div>
             </div>
@@ -57,18 +57,19 @@
                     <input type="text" class="form-control" name="mota" id="mota" aria-describedby="helpId" placeholder="" value='' />
                 </div>
                 <div class="form-group">
-                    <label for="">Nội dung</label>
-                    <textarea class="form-control" name="noidung" id="editor2" aria-describedby="helpId" placeholder=""></textarea>
+                    <label for="">Liên kết</label>
+                    <input type="text" class="form-control" name="lienket" id="lienket" aria-describedby="helpId" placeholder="" />
                 </div>
 				<div class="form-group mt-5">
 					<button name="" id="" class="btn btn-success btn-sm btn-luutintuc" type='submit'>
 					<i class="fa fa-save"></i>&nbsp;&nbsp;Lưu lại</button>
-                    <a href="<?php echo base_url('backend/dichvu')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
+                    <a href="<?php echo base_url('backend/khachhang')?>" name="" id="" class="btn btn-danger btn-sm btn-luutintuc" type='button'>
 					<i class="fa fa-save"></i>&nbsp;&nbsp;Quay lại</a>
 				</div>
 			</div>
 		 </div>
     </div>
+    </form>
 </div>
 
 <script>

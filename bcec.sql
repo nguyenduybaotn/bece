@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 23, 2019 lúc 11:59 AM
+-- Thời gian đã tạo: Th7 24, 2019 lúc 11:44 AM
 -- Phiên bản máy phục vụ: 10.1.28-MariaDB
 -- Phiên bản PHP: 7.1.10
 
@@ -45,6 +45,37 @@ INSERT INTO `album` (`id`, `hinh`, `loai`, `sapxep`, `trangthai`, `hinhthumb`) V
 (14, '/datauploads/sanpham/1/home_12.jpg', 1, 2, 1, ''),
 (15, '/datauploads/sanpham/1/home_13.jpg', 1, 2, 1, ''),
 (16, '/datauploads/sanpham/1/home_14.jpg', 1, 2, 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `blog`
+--
+
+CREATE TABLE `blog` (
+  `id` int(11) NOT NULL,
+  `ten` text NOT NULL,
+  `mota` mediumtext NOT NULL,
+  `noidung` mediumtext NOT NULL,
+  `hinhdaidien` text NOT NULL,
+  `ngaydang` datetime NOT NULL,
+  `trangthai` int(11) NOT NULL,
+  `sapxep` int(11) NOT NULL,
+  `lienket` text NOT NULL,
+  `solangui` int(11) NOT NULL,
+  `ten2` text NOT NULL,
+  `mota2` text NOT NULL,
+  `noidung2` text NOT NULL,
+  `lienket2` text NOT NULL,
+  `loai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `blog`
+--
+
+INSERT INTO `blog` (`id`, `ten`, `mota`, `noidung`, `hinhdaidien`, `ngaydang`, `trangthai`, `sapxep`, `lienket`, `solangui`, `ten2`, `mota2`, `noidung2`, `lienket2`, `loai`) VALUES
+(1, 'Blog 1', 'Blog 1', '', '/datauploads/tintuc/orther-product-demo-051.jpg', '2019-07-24 13:26:45', 1, 1, 'blog-1-1.html', 0, 'Blog 1', 'Blog 1', '<p>Blog 1</p>\r\n', 'blog-1-1.html', 0);
 
 -- --------------------------------------------------------
 
@@ -114,6 +145,57 @@ INSERT INTO `danhmucsanpham` (`id`, `ten`, `hinhdaidien`, `mota`, `lienkettrong`
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `dichvu`
+--
+
+CREATE TABLE `dichvu` (
+  `id` int(11) NOT NULL,
+  `ten` text NOT NULL,
+  `mota` mediumtext NOT NULL,
+  `noidung` mediumtext NOT NULL,
+  `hinhdaidien` text NOT NULL,
+  `ngaydang` datetime NOT NULL,
+  `trangthai` int(11) NOT NULL,
+  `sapxep` int(11) NOT NULL,
+  `lienket` text NOT NULL,
+  `solangui` int(11) NOT NULL,
+  `ten2` text NOT NULL,
+  `mota2` text NOT NULL,
+  `noidung2` text NOT NULL,
+  `lienket2` text NOT NULL,
+  `loai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `khachhang`
+--
+
+CREATE TABLE `khachhang` (
+  `id` int(11) NOT NULL,
+  `ten` text NOT NULL,
+  `hinhdaidien` text NOT NULL,
+  `lienket` text NOT NULL,
+  `sapxep` int(11) NOT NULL,
+  `trangthai` int(11) NOT NULL,
+  `ten2` text NOT NULL,
+  `mota` text NOT NULL,
+  `mota2` text NOT NULL,
+  `lienket2` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `khachhang`
+--
+
+INSERT INTO `khachhang` (`id`, `ten`, `hinhdaidien`, `lienket`, `sapxep`, `trangthai`, `ten2`, `mota`, `mota2`, `lienket2`) VALUES
+(3, 'Khách hàng 01', '/datauploads/khachhang/our-showcase-demo-05.jpg', '#xxx', 0, 1, 'Khách hàng 011', 'Khách hàng 01', 'Khách hàng 01', '#xxx'),
+(4, 'Khách hàng 02', '/datauploads/khachhang/our-showcase-demo-06.jpg', '#xx', 1, 1, 'Khách hàng 02', 'Khách hàng 0 f', 'Khách hàng 0 f', '#xx');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `lienhe`
 --
 
@@ -171,16 +253,17 @@ CREATE TABLE `nhanvien` (
   `matkhau` varchar(100) NOT NULL,
   `trangthai` int(11) NOT NULL,
   `hinhdaidien` text NOT NULL,
-  `email` text NOT NULL
+  `email` text NOT NULL,
+  `spam` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `nhanvien`
 --
 
-INSERT INTO `nhanvien` (`id`, `tendangnhap`, `tendangnhapmd5`, `hoten`, `matkhau`, `trangthai`, `hinhdaidien`, `email`) VALUES
-(1, 'nguyenduybaotn', 'ca7382a8942ed3d0308df15bbed74bf7', 'Nguyễn Duy Bảo', 'e10adc3949ba59abbe56e057f20f883e', 1, '/datauploads/menu/our-showcase-demo-035.jpg', 'nguyenduybaotn@gmail.com'),
-(3, 'administrator', '200ceb26807d6bf99fd6f4f0d1ca54d4', 'Admin', '40fbe32a8a5789ea8f62f978c81d2ba7', 1, '', 'nguyenduybaotn@gmail.com');
+INSERT INTO `nhanvien` (`id`, `tendangnhap`, `tendangnhapmd5`, `hoten`, `matkhau`, `trangthai`, `hinhdaidien`, `email`, `spam`) VALUES
+(1, 'nguyenduybaotn', 'ca7382a8942ed3d0308df15bbed74bf7', 'Nguyễn Duy Bảo', '59db60a30c0d87dfe93c3f3600b391c2', 1, '/datauploads/menu/our-showcase-demo-035.jpg', 'nguyenduybaotn@gmail.com', 0),
+(3, 'administrator', '200ceb26807d6bf99fd6f4f0d1ca54d4', 'Admin', '41e59652474161d751acba735488d615', 1, '', 'nguyenduybaovn@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -229,52 +312,20 @@ CREATE TABLE `truycap` (
   `thoigian` datetime NOT NULL,
   `noidung` text NOT NULL,
   `trangthai` int(11) NOT NULL DEFAULT '0',
-  `danhmuc` text NOT NULL
+  `danhmuc` text NOT NULL,
+  `mota` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `truycap`
 --
 
-INSERT INTO `truycap` (`id`, `ip`, `thoigian`, `noidung`, `trangthai`, `danhmuc`) VALUES
-(920, '::1', '2019-07-23 12:53:49', '<b>nguyenduybaotn1</b> đăng nhập không thành công', 0, ''),
-(921, '::1', '2019-07-23 12:53:53', '<b>nguyenduybaotn</b> đăng nhập thành công', 1, 'Đăng nhập/Đăng xuất'),
-(922, '::1', '2019-07-23 12:53:58', '<b>nguyenduybaotn</b> đã đăng xuất', 0, ''),
-(923, '::1', '2019-07-23 12:58:01', '<b>nguyenduybaotn</b> đăng nhập thành công', 1, 'Đăng nhập/Đăng xuất'),
-(924, '::1', '2019-07-23 01:03:42', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(925, '::1', '2019-07-23 01:33:00', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(926, '::1', '2019-07-23 01:34:19', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(927, '::1', '2019-07-23 01:43:20', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(928, '::1', '2019-07-23 01:43:22', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(929, '::1', '2019-07-23 01:43:23', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(930, '::1', '2019-07-23 01:49:28', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(931, '::1', '2019-07-23 01:49:46', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(932, '::1', '2019-07-23 01:54:01', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(933, '::1', '2019-07-23 01:54:43', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(934, '::1', '2019-07-23 01:54:59', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(935, '::1', '2019-07-23 01:55:57', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(936, '::1', '2019-07-23 01:57:02', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(937, '::1', '2019-07-23 01:57:52', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(938, '::1', '2019-07-23 01:57:57', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(939, '::1', '2019-07-23 01:58:03', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(940, '::1', '2019-07-23 01:58:08', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(941, '::1', '2019-07-23 01:58:11', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(942, '::1', '2019-07-23 02:00:53', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(943, '::1', '2019-07-23 02:01:00', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(944, '::1', '2019-07-23 02:01:04', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(945, '::1', '2019-07-23 02:03:14', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(946, '::1', '2019-07-23 02:03:15', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(947, '::1', '2019-07-23 02:03:20', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(948, '::1', '2019-07-23 02:06:53', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(949, '::1', '2019-07-23 02:06:58', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(950, '::1', '2019-07-23 02:08:32', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(951, '::1', '2019-07-23 02:12:24', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(952, '::1', '2019-07-23 02:38:38', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(953, '::1', '2019-07-23 02:38:45', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(954, '::1', '2019-07-23 02:38:50', 'Vào trang profile của nguyenduybaotn', 0, ''),
-(955, '::1', '2019-07-23 02:39:41', 'Vào trang menu', 0, ''),
-(956, '::1', '2019-07-23 02:39:44', 'Vào trang menu', 0, ''),
-(957, '::1', '2019-07-23 02:45:19', '<b>nguyenduybaotn</b> đã đăng xuất', 0, '');
+INSERT INTO `truycap` (`id`, `ip`, `thoigian`, `noidung`, `trangthai`, `danhmuc`, `mota`) VALUES
+(988, '::1', '2019-07-24 13:53:35', '', 1, 'Đăng nhập/Đăng xuất', '<b>nguyenduybaotn</b> đã đăng xuất'),
+(989, '::1', '2019-07-24 13:53:37', '{\"id\":\"1\",\"tendangnhap\":\"nguyenduybaotn\",\"tinhtrang\":\"1\",\"logged_in\":true}', 1, 'Đăng nhập/Đăng xuất', '<b>nguyenduybaotn</b> đăng nhập thành công'),
+(990, '::1', '2019-07-24 15:28:12', '[{\"id\":\"0\",\"ten\":\"1\",\"mota\":\"1\",\"noidung\":\"\",\"hinhdaidien\":\"\\/datauploads\\/dichvu\\/product-category-demo-04.jpg\",\"ngaydang\":\"2019-07-24 15:28:12\",\"trangthai\":\"1\",\"sapxep\":\"1\",\"lienket\":\"1-1.html\",\"solangui\":\"0\",\"ten2\":\"1\",\"mota2\":\"1\",\"noidung2\":\"<p>1<\\/p>\\r\\n\",\"lienket2\":\"1-1.html\",\"loai\":\"0\"}]', 1, 'Dịch vụ', '<b>nguyenduybaotn</b> đã thêm dịch vụ: 1'),
+(991, '::1', '2019-07-24 15:28:19', '[{\"id\":\"0\",\"ten\":\"1\",\"mota\":\"1\",\"noidung\":\"\",\"hinhdaidien\":\"\\/datauploads\\/dichvu\\/product-category-demo-04.jpg\",\"ngaydang\":\"2019-07-24 15:28:12\",\"trangthai\":\"1\",\"sapxep\":\"1\",\"lienket\":\"1-1.html\",\"solangui\":\"0\",\"ten2\":\"1\",\"mota2\":\"1\",\"noidung2\":\"<p>1<\\/p>\\r\\n\",\"lienket2\":\"1-1.html\",\"loai\":\"0\"}] <--> [{\"id\":\"0\",\"ten\":\"1\",\"mota\":\"1\",\"noidung\":\"\",\"hinhdaidien\":\"\\/datauploads\\/dichvu\\/product-category-demo-04.jpg\",\"ngaydang\":\"2019-07-24 15:28:12\",\"trangthai\":\"1\",\"sapxep\":\"1\",\"lienket\":\"1-1.html\",\"solangui\":\"0\",\"ten2\":\"12\",\"mota2\":\"1\",\"noidung2\":\"<p>1<\\/p>\\r\\n\",\"lienket2\":\"12-1.html\",\"loai\":\"0\"}]', 1, 'Dịch vụ', '<b>nguyenduybaotn</b> đã sửa dịch vụ: 1 thành: 12'),
+(992, '::1', '2019-07-24 15:28:21', '[]', 1, 'Dịch vụ', '<b>nguyenduybaotn</b> đã xóa dịch vụ: 12');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -287,6 +338,12 @@ ALTER TABLE `album`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `blog`
+--
+ALTER TABLE `blog`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `cauhinh`
 --
 ALTER TABLE `cauhinh`
@@ -296,6 +353,12 @@ ALTER TABLE `cauhinh`
 -- Chỉ mục cho bảng `danhmucsanpham`
 --
 ALTER TABLE `danhmucsanpham`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `khachhang`
+--
+ALTER TABLE `khachhang`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -339,6 +402,12 @@ ALTER TABLE `album`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT cho bảng `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT cho bảng `cauhinh`
 --
 ALTER TABLE `cauhinh`
@@ -349,6 +418,12 @@ ALTER TABLE `cauhinh`
 --
 ALTER TABLE `danhmucsanpham`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT cho bảng `khachhang`
+--
+ALTER TABLE `khachhang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `lienhe`
@@ -366,7 +441,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `sanpham`
@@ -378,7 +453,7 @@ ALTER TABLE `sanpham`
 -- AUTO_INCREMENT cho bảng `truycap`
 --
 ALTER TABLE `truycap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=958;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=993;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

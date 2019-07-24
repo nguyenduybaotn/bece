@@ -231,40 +231,45 @@ class Tool_model extends CI_Model{
 			$ipaddress = 'UNKNOWN';
 		return $ipaddress;
 	}
-	public function send_email($email,$title,$content){
-		/*hE3f+8&OOeT?*/
+	public function send_email($emailFrom,$emailTo,$subjectF,$subject,$message){
 		$config = array(
-                    'protocol' => 'smtp',
-                    'smtp_host' => 'mail.nbcmedia.vn',
-                    'smtp_port' => 25,
-                    'smtp_user' => 'bao.nguyen@nbcmedia.vn',
-                    'smtp_pass' => 'ndb',
-                    'mailtype'  => 'html', 
-                    'charset'   => 'utf-8'  
-                );
-		$to = $email;
-	        $from = "booking@theorchestra.com";
-	        $subject = $title;
-	        $message = $content;
-	
-	        $this->load->library('email',$config);
-			
-	        $this->email->set_newline("\r\n");
-	        $this->email->from($from,'The Rainbow Show');
-	        $this->email->to($to);
-	        $this->email->subject($subject);
-	        $this->email->message($message);
-	 
-	        if($this->email->send()) {
-                    return true;
-        	}else {
-                    return false;
-        	}
+			'protocol'  => 'smtp',
+			'smtp_host' => 'ssl://smtp.gmail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'itsc.erp2019@gmail.com',
+			'smtp_pass' => 'nhabe123',
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8'  
+			);
+		$this->load->library('email',$config);
+		
+		$this->email->set_newline("\r\n");
+		$this->email->from($emailFrom,$subjectF);
+		$this->email->to($emailTo);
+		$this->email->subject($subject);
+		$this->email->message($message);
+		if($this->email->send($emailTo,$subject,$message))
+			return true;
+		else
+			return false;
+		//echo $this->email->print_debugger();
+
 	}
-	public function ghi_log($ip, $thoigian, $content, $trangthai=0,$danhmuc=''){
+	function randomPassword($len) {
+		$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+		$pass = array(); //remember to declare $pass as an array
+		$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+		for ($i = 0; $i < $len; $i++) {
+			$n = rand(0, $alphaLength);
+			$pass[] = $alphabet[$n];
+		}
+		return implode($pass); //turn the array into a string
+	}
+	public function ghi_log($ip, $thoigian, $mota, $trangthai=0,$danhmuc='',$content=''){
 		$data = array(
 			'ip' 			=> $ip,
 			'thoigian'  	=> $thoigian,
+			'mota' 			=> $mota,
 			'noidung' 		=> $content,
 			'trangthai'		=> $trangthai,
 			'danhmuc'		=> $danhmuc
@@ -491,7 +496,7 @@ class Tool_model extends CI_Model{
         return $kq->row()->maxsapxep+1;
 	}
 	
-	function themtintuc($hinhdaidien,$loai){
+	function themblog($hinhdaidien,$loai){
 		$ten = $this->input->post('ten');
 		$mota = $this->input->post('mota');
 		$noidung = $this->input->post('noidung');
@@ -521,9 +526,10 @@ class Tool_model extends CI_Model{
 			'lienket'		=> $this->tool_model->encode_url($ten,$sapxep),
 			'lienket2'		=> $this->tool_model->encode_url($ten2,$sapxep)
 		);
-		$this->db->insert('tintuc',$data);
+		$this->db->insert('blog',$data);
+		return $this->db->insert_id();
 	}
-	function suatintuc($id,$hinhdaidien){
+	function suablog($id,$hinhdaidien){
 		$ten = $this->input->post('ten');
 		$mota = $this->input->post('mota');
 		$noidung = $this->input->post('noidung');
@@ -537,7 +543,7 @@ class Tool_model extends CI_Model{
 		else
 			$trangthai = 1;
 		
-		if($hinhdaidien=='') $hinhdaidien = $this->tool_model->get_element_table_where('hinhdaidien','tintuc',"id=$id");
+		if($hinhdaidien=='') $hinhdaidien = $this->tool_model->get_element_table_where('hinhdaidien','blog',"id=$id");
 
 		$data = array(
 			'ten' 			=> $ten,
@@ -553,12 +559,12 @@ class Tool_model extends CI_Model{
 			'lienket2'		=> $this->tool_model->encode_url($ten2,$sapxep)
 		);
 		$this->db->where('id',$id);
-		$this->db->update('tintuc',$data);
+		$this->db->update('blog',$data);
 	}
-	function xoatintuc($id){
-		$this->db->delete('tintuc',array('id' => $id));
+	function xoablog($id){
+		$this->db->delete('blog',array('id' => $id));
 	}
-	
+
 	
 	function themdichvu($hinhdaidien,$loai){
 		$ten = $this->input->post('ten');
@@ -591,6 +597,7 @@ class Tool_model extends CI_Model{
 			'lienket2'		=> $this->tool_model->encode_url($ten2,$sapxep)
 		);
 		$this->db->insert('dichvu',$data);
+		return $this->db->insert_id();
 	}
 	function suadichvu($id,$hinhdaidien){
 		$ten = $this->input->post('ten');
@@ -627,57 +634,66 @@ class Tool_model extends CI_Model{
 	function xoadichvu($id){
 		$this->db->delete('dichvu',array('id' => $id));
 	}
-	
-	public function get_danhmuc_by_id($id){
-		$sql = "select danhmuccha from danhmucsanpham where id = '$id' ";
-		$kq=$this->db->query($sql);
-		return $kq->row()->danhmuccha;
-	}
-	public function get_all_category_by_link($link,$language){
-		$result =array();
-		$iddanhmuc = $this->get_element_table_where('id','danhmucsanpham', "lienkettrong='$link'");
-		if($language=='en') $iddanhmuc = $this->get_element_table_where('id','danhmucsanpham', "lienkettrong2='$link'");
-		$ck=true;
-		while($ck){
-			$iddanhmuc = $this->get_danhmuc_by_id($iddanhmuc);
-			if($iddanhmuc)
-				array_push($result,$iddanhmuc);
-			else
-				$ck=false;
-		}
-		return $result;
-	}
-	
-	public function debug($data=""){
-		if(isset($data)){
-			if($data != ""){	
-				if( is_array($data) ){
-					echo "<pre>";
-					print_r($data);
-					echo "</pre>";
-				}else{
-					echo "<font color='red' >Error - Day la 1 chuoi .</font>";
-				}	
-			}else{
-				echo "<font color='red' >Error - Bien rong .</font>";
-			}
-		}else{
-			echo "<font color='red' >Error - Bien nay chua ton tai .</font>";
-		}
-	}
 
-	public function get_all_table_where_array($table, $where){
-		$sql = "select * from $table where $where";
-		$kq=$this->db->query($sql);
-		return $kq->result_array();
+	function themkhachhang($hinhdaidien){
+		$ten = $this->input->post('ten');
+		$mota = $this->input->post('mota');
+		$ten2 = $this->input->post('ten2');
+		$mota2 = $this->input->post('mota2');
+		$lienket = $this->input->post('lienket');
+		$lienket2 = $this->input->post('lienket2');
+		
+		$sapxep = $this->input->post('sapxep');
+		if($this->input->post('trangthai') == null)
+			$trangthai = 0;
+		else
+			$trangthai = 1;
+
+		$data = array(
+			'ten' 			=> $ten,
+			'mota'  		=> $mota,
+			'ten2' 			=> $ten2,
+			'mota2'  		=> $mota2,
+			'hinhdaidien' 	=> $hinhdaidien,
+			'sapxep' 		=> $sapxep,
+			'trangthai'		=> $trangthai,
+			'lienket'		=> $lienket,
+			'lienket2'		=> $lienket2
+		);
+		$this->db->insert('khachhang',$data);
+		return $this->db->insert_id();
 	}
-	public function get_element_table_where_array($element, $table, $where){
-        $sql = "select $element from $table where $where";
-        $kq=$this->db->query($sql);
-        if($kq->num_rows() > 0){
-        	$data = $kq->row_array();
-        	return $data[$element];
-        }
+	function suakhachhang($id,$hinhdaidien){
+		$ten = $this->input->post('ten');
+		$mota = $this->input->post('mota');
+		$ten2 = $this->input->post('ten2');
+		$mota2 = $this->input->post('mota2');
+		$lienket = $this->input->post('lienket');
+		$lienket2 = $this->input->post('lienket2');
+
+		if($this->input->post('trangthai') == null)
+			$trangthai = 0;
+		else
+			$trangthai = 1;
+		
+		if($hinhdaidien=='') $hinhdaidien = $this->tool_model->get_element_table_where('hinhdaidien','khachhang',"id=$id");
+
+		$data = array(
+			'ten' 			=> $ten,
+			'mota'  		=> $mota,
+			'ten2' 			=> $ten2,
+			'mota2'  		=> $mota2,
+			'hinhdaidien' 	=> $hinhdaidien,
+			'sapxep' 		=> $sapxep,
+			'trangthai'		=> $trangthai,
+			'lienket'		=> $lienket,
+			'lienket2'		=> $lienket2
+		);
+		$this->db->where('id',$id);
+		$this->db->update('khachhang',$data);
+	}
+	function xoakhachhang($id){
+		$this->db->delete('khachhang',array('id' => $id));
 	}
 	public function save_contact($name,$tel,$email,$content){
 		$date = 

@@ -14,6 +14,8 @@ $PATH_FOLDER_THEME = base_url("themes/Stellar-Admin/");
   <title><?php if(isset($title)) echo $title; else echo "Quản trị";?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    
+    <script src="<?php echo base_url('ckeditor/ckeditor.js');?>" ></script>
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?php echo $PATH_FOLDER_THEME;?>node_modules/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="<?php echo $PATH_FOLDER_THEME;?>node_modules/simple-line-icons/css/simple-line-icons.css">
@@ -51,67 +53,6 @@ $PATH_FOLDER_THEME = base_url("themes/Stellar-Admin/");
               </div>
             </form>
           </li>
-		  <!--
-          <li class="nav-item dropdown mail-dropdown">
-            <a class="nav-link count-indicator" id="MailDropdown" href="#" data-toggle="dropdown">
-                <i class="icon-envelope-letter icons"></i>
-                <span class="count bg-danger"></span>
-            </a>
-            <div class="dropdown-menu navbar-dropdown mail-notification dropdownAnimation" aria-labelledby="MailDropdown">
-              <!--
-			  <a class="dropdown-item" href="#">
-                <div class="sender-img">
-                  <img src="images/faces/face6.jpg" alt="">
-                  <span class="badge badge-success">&nbsp;</span>
-                </div>
-                <div class="sender">
-                  <p class="Sende-name">John Doe</p>
-                  <p class="Sender-message">Hey, We have a meeting planned at the end of the day.</p>
-                </div>
-              </a>
-              <a class="dropdown-item" href="#">
-                <div class="sender-img">
-                  <img src="images/faces/face2.jpg" alt="">
-                  <span class="badge badge-success">&nbsp;</span>
-                </div>
-                <div class="sender">
-                  <p class="Sende-name">Leanne Jones</p>
-                  <p class="Sender-message">Can we schedule a call this afternoon?</p>
-                </div>
-              </a>
-              <a class="dropdown-item" href="#">
-                <div class="sender-img">
-                  <img src="images/faces/face3.jpg" alt="">
-                  <span class="badge badge-primary">&nbsp;</span>
-                </div>
-                <div class="sender">
-                  <p class="Sende-name">Stella</p>
-                  <p class="Sender-message">Great presentation the other day. Keep up the good work!</p>
-                </div>
-              </a>
-              <a class="dropdown-item" href="#">
-                <div class="sender-img">
-                  <img src="images/faces/face4.jpg" alt="">
-                  <span class="badge badge-warning">&nbsp;</span>
-                </div>
-                <div class="sender">
-                  <p class="Sende-name">James Brown</p>
-                  <p class="Sender-message">Need the updates of the project at the end of the week.</p>
-                </div>
-              </a>
-              <a href="#" class="dropdown-item view-all">View all</a>
-			  
-            </div>
-          </li>
-		  
-        
-          <li class="nav-item d-none d-sm-block profile-img">
-            <a class="nav-link profile-image" href="#">
-              <img src="<?php echo $PATH_FOLDER_THEME;?>images/faces/face4.jpg" alt="profile-img">
-              <span class="online-status online bg-success"></span>
-            </a>
-          </li>
-		    -->
           <li class="nav-item dropdown notification-dropdown">
             
 			<a class="nav-link count-indicator" id="notificationDropdown" href="#" data-toggle="dropdown">
@@ -175,7 +116,37 @@ $PATH_FOLDER_THEME = base_url("themes/Stellar-Admin/");
                 <span class="menu-title">Quản lý danh sách menu</span>
                 <i class="icon-wrench menu-icon"></i>
               </a>
-            </li>     
+            </li>  
+            <li class="nav-item nav-category">
+              <span class="nav-link">Quản lý bài viết</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?php if(isset($page) && $page == 'blog') echo "page_active";?>" href="<?php echo base_url('backend/blog');?>">
+                <span class="menu-title">Danh sách bài blog</span>
+                <i class="icon-speedometer menu-icon"></i>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link <?php if(isset($page) && $page == 'dichvu') echo "page_active";?>" href="<?php echo base_url('backend/dichvu');?>">
+                <span class="menu-title">Danh sách bài dịch vụ</span>
+                <i class="icon-speedometer menu-icon"></i>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link <?php if(isset($page) && $page == 'tuyendung') echo "page_active";?>" href="<?php echo base_url('backend/tuyendung');?>">
+                <span class="menu-title">Danh sách bài tuyển dụng</span>
+                <i class="icon-speedometer menu-icon"></i>
+              </a>
+            </li> 
+            <li class="nav-item nav-category">
+              <span class="nav-link">Quản lý khách hàng</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?php if(isset($page) && $page == 'khachhang') echo "page_active";?>" href="<?php echo base_url('backend/khachhang');?>">
+                <span class="menu-title">Danh sách khách hàng</span>
+                <i class="icon-speedometer menu-icon"></i>
+              </a>
+            </li>   
           </ul>
         </nav>
         <!-- partial -->
