@@ -47,6 +47,16 @@ class Backend extends CI_Controller {
 		$nhanvien = $this->nhanvien_model->kiemtradangnhap($data['tendangnhap'],$data['matkhau']);
 		// neu ton tai 1 nhan vien tro len thoa thong tin dang nhap
 		if($nhanvien=='-1'){
+			if($this->tool_model->count_row_table_where('nhanvien',"tendangnhapmd5='".md5($data['tendangnhap'])."'")> 0){
+				// co ton tai ten dang nhap trong database
+				$spam = $this->tool_model->get_element_table_where('spam','nhanvien',"tendangnhapmd5='".md5($data['tendangnhap'])."'");
+				// nếu spam > 5 thì khóa lại
+				echo '-1';
+				exit();
+				// nếu spam <= 5 thì cập nhật spam tăng lên 1
+				$email = $this->tool_model->get_element_table_where('email','nhanvien',"tendangnhapmd5='".md5($data['tendangnhap'])."'");
+				$this->nhanvien_model->update('spam',$spam + 1,$email);
+			}
 			echo 0;
 			// ghi log
 			$thoigian = date("Y-m-d H:i:s");
@@ -72,8 +82,19 @@ class Backend extends CI_Controller {
 			$content_log .= "<b>".$nhanvien->tendangnhap."</b> đăng nhập thành công";
 			$fullContent = json_encode($newdata);
 			$this->tool_model->ghi_log($this->tool_model->get_client_ip(), $thoigian, $content_log,1,"Đăng nhập/Đăng xuất",$fullContent);
+			// cập nhật spam về 0
+			$this->nhanvien_model->update('spam',0,$nhanvien->email);
 		}else if(count($nhanvien) > 1 || count($nhanvien) == 0){ // khong ton tai hoac co tu 2 ket qua tro len
-			echo 0;
+			if($this->tool_model->count_row_table_where('nhanvien',"tendangnhapmd5='".md5($data['tendangnhap'])."'")> 0){
+				// co ton tai ten dang nhap trong database
+				$spam = $this->tool_model->get_element_table_where('spam','nhanvien',"tendangnhapmd5='".md5($data['tendangnhap'])."'");
+				// nếu spam > 5 thì khóa lại
+				echo '-1';
+				exit();
+				// nếu spam <= 5 thì cập nhật spam tăng lên 1
+				$email = $this->tool_model->get_element_table_where('email','nhanvien',"tendangnhapmd5='".md5($data['tendangnhap'])."'");
+				$this->nhanvien_model->update('spam',$spam + 1,$email);
+			}
 			// ghi log
 			$thoigian = date("Y-m-d H:i:s");
 			$content_log = "";
@@ -113,7 +134,7 @@ class Backend extends CI_Controller {
 		$data = $this->input->post('email');
 		if(count($this->tool_model->get_all_table_where("nhanvien","email='$data'"))>0){
 			$spam = $this->tool_model->get_element_table_where('spam','nhanvien',"email='$data'");
-			if($spam > 2){
+			if($spam > 5){
 				// spam rồi nên khóa lại
 				echo "0";
 			}else{

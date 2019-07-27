@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 24, 2019 lúc 11:44 AM
+-- Thời gian đã tạo: Th7 27, 2019 lúc 05:47 AM
 -- Phiên bản máy phục vụ: 10.1.28-MariaDB
 -- Phiên bản PHP: 7.1.10
 
@@ -45,6 +45,18 @@ INSERT INTO `album` (`id`, `hinh`, `loai`, `sapxep`, `trangthai`, `hinhthumb`) V
 (14, '/datauploads/sanpham/1/home_12.jpg', 1, 2, 1, ''),
 (15, '/datauploads/sanpham/1/home_13.jpg', 1, 2, 1, ''),
 (16, '/datauploads/sanpham/1/home_14.jpg', 1, 2, 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `blacklist`
+--
+
+CREATE TABLE `blacklist` (
+  `id` int(11) NOT NULL,
+  `ip` text NOT NULL,
+  `lydo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -325,7 +337,17 @@ INSERT INTO `truycap` (`id`, `ip`, `thoigian`, `noidung`, `trangthai`, `danhmuc`
 (989, '::1', '2019-07-24 13:53:37', '{\"id\":\"1\",\"tendangnhap\":\"nguyenduybaotn\",\"tinhtrang\":\"1\",\"logged_in\":true}', 1, 'Đăng nhập/Đăng xuất', '<b>nguyenduybaotn</b> đăng nhập thành công'),
 (990, '::1', '2019-07-24 15:28:12', '[{\"id\":\"0\",\"ten\":\"1\",\"mota\":\"1\",\"noidung\":\"\",\"hinhdaidien\":\"\\/datauploads\\/dichvu\\/product-category-demo-04.jpg\",\"ngaydang\":\"2019-07-24 15:28:12\",\"trangthai\":\"1\",\"sapxep\":\"1\",\"lienket\":\"1-1.html\",\"solangui\":\"0\",\"ten2\":\"1\",\"mota2\":\"1\",\"noidung2\":\"<p>1<\\/p>\\r\\n\",\"lienket2\":\"1-1.html\",\"loai\":\"0\"}]', 1, 'Dịch vụ', '<b>nguyenduybaotn</b> đã thêm dịch vụ: 1'),
 (991, '::1', '2019-07-24 15:28:19', '[{\"id\":\"0\",\"ten\":\"1\",\"mota\":\"1\",\"noidung\":\"\",\"hinhdaidien\":\"\\/datauploads\\/dichvu\\/product-category-demo-04.jpg\",\"ngaydang\":\"2019-07-24 15:28:12\",\"trangthai\":\"1\",\"sapxep\":\"1\",\"lienket\":\"1-1.html\",\"solangui\":\"0\",\"ten2\":\"1\",\"mota2\":\"1\",\"noidung2\":\"<p>1<\\/p>\\r\\n\",\"lienket2\":\"1-1.html\",\"loai\":\"0\"}] <--> [{\"id\":\"0\",\"ten\":\"1\",\"mota\":\"1\",\"noidung\":\"\",\"hinhdaidien\":\"\\/datauploads\\/dichvu\\/product-category-demo-04.jpg\",\"ngaydang\":\"2019-07-24 15:28:12\",\"trangthai\":\"1\",\"sapxep\":\"1\",\"lienket\":\"1-1.html\",\"solangui\":\"0\",\"ten2\":\"12\",\"mota2\":\"1\",\"noidung2\":\"<p>1<\\/p>\\r\\n\",\"lienket2\":\"12-1.html\",\"loai\":\"0\"}]', 1, 'Dịch vụ', '<b>nguyenduybaotn</b> đã sửa dịch vụ: 1 thành: 12'),
-(992, '::1', '2019-07-24 15:28:21', '[]', 1, 'Dịch vụ', '<b>nguyenduybaotn</b> đã xóa dịch vụ: 12');
+(992, '::1', '2019-07-24 15:28:21', '[]', 1, 'Dịch vụ', '<b>nguyenduybaotn</b> đã xóa dịch vụ: 12'),
+(993, '::1', '2019-07-26 09:47:40', '{\"id\":\"1\",\"tendangnhap\":\"nguyenduybaotn\",\"tinhtrang\":\"1\",\"logged_in\":true}', 1, 'Đăng nhập/Đăng xuất', '<b>nguyenduybaotn</b> đăng nhập thành công'),
+(994, '::1', '2019-07-26 10:37:41', '', 1, 'Đăng nhập/Đăng xuất', '<b>nguyenduybaotn</b> đã đăng xuất'),
+(995, '::1', '2019-07-26 10:37:46', '{\"tendangnhap\":\"nguyenduybaotn\",\"matkhau\":\"1340camdung1\"}', 0, '', '<b>nguyenduybaotn</b> đăng nhập không thành công'),
+(996, '::1', '2019-07-26 10:37:55', '{\"tendangnhap\":\"nguyenduybaotn\",\"matkhau\":\"1340camdung1222\"}', 0, '', '<b>nguyenduybaotn</b> đăng nhập không thành công'),
+(997, '::1', '2019-07-26 10:38:05', '{\"tendangnhap\":\"nguyenduybaotn\",\"matkhau\":\"1340camdung1222\"}', 0, '', '<b>nguyenduybaotn</b> đăng nhập không thành công'),
+(998, '::1', '2019-07-26 10:38:08', '{\"tendangnhap\":\"nguyenduybaotn\",\"matkhau\":\"1340camdung1222\"}', 0, '', '<b>nguyenduybaotn</b> đăng nhập không thành công'),
+(999, '::1', '2019-07-26 10:38:09', '{\"tendangnhap\":\"nguyenduybaotn\",\"matkhau\":\"1340camdung1222\"}', 0, '', '<b>nguyenduybaotn</b> đăng nhập không thành công'),
+(1000, '::1', '2019-07-26 10:38:11', '{\"tendangnhap\":\"nguyenduybaotn\",\"matkhau\":\"1340camdung1222\"}', 0, '', '<b>nguyenduybaotn</b> đăng nhập không thành công'),
+(1001, '::1', '2019-07-26 10:38:12', '{\"tendangnhap\":\"nguyenduybaotn\",\"matkhau\":\"1340camdung1222\"}', 0, '', '<b>nguyenduybaotn</b> đăng nhập không thành công'),
+(1002, '::1', '2019-07-26 10:53:42', '{\"id\":\"1\",\"tendangnhap\":\"nguyenduybaotn\",\"tinhtrang\":\"1\",\"logged_in\":true}', 1, 'Đăng nhập/Đăng xuất', '<b>nguyenduybaotn</b> đăng nhập thành công');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -335,6 +357,12 @@ INSERT INTO `truycap` (`id`, `ip`, `thoigian`, `noidung`, `trangthai`, `danhmuc`
 -- Chỉ mục cho bảng `album`
 --
 ALTER TABLE `album`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `blacklist`
+--
+ALTER TABLE `blacklist`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -402,10 +430,16 @@ ALTER TABLE `album`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT cho bảng `blacklist`
+--
+ALTER TABLE `blacklist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `cauhinh`
@@ -453,7 +487,7 @@ ALTER TABLE `sanpham`
 -- AUTO_INCREMENT cho bảng `truycap`
 --
 ALTER TABLE `truycap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=993;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -92,19 +92,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						data : {user:user},
 						success : function(response){
 							console.log(response);
-							if(response!=0){
-								$.notify("Đăng nhập thành công", "success");
-								setTimeout(function(){
-									window.location.href = response;
-								},1000);
-								
-							}else{
+							if(response=='0'){
 								$.notify("Đăng nhập không thành công", "danger");
 								$('.login__submit').removeAttr('disabled');
 								$('.login__submit').html("Login");
 								$('.loi').addClass("alert alert-danger");
 								$('.loi').html("Sai tên đăng nhập hoặc mật khẩu!");
 								$('.login__submit').html("Sign in");
+							}else if(response=='-1'){ // spam
+								$.notify("Đăng nhập sai quá nhiều lần", "warning");
+								setTimeout(function(){
+									location.reload();
+								},1000);
+							}else{
+								$.notify("Đăng nhập thành công", "success");
+								setTimeout(function(){
+									window.location.href = response;
+								},1000);
 							}
 						},
 						error : function(response){
